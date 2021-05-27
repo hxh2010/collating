@@ -132,6 +132,7 @@ type PetList = [Dog, Pet];
 
 
 ### 什么是泛型
+- 泛型（Generics）是指在定义函数、接口或类的时候，不预先指定具体的类型，而在使用的时候再指定类型的一种特性。
 - 泛型可以理解为多个类型，通过一些类型变量增加重用性
 - 也可以通过 `extends` 关键字来约束
 - 泛型参数默认类型 `interface A<T=string> { name: T; }`
@@ -160,10 +161,77 @@ type AA = ParamType<string>; // string
 
 
 ### 内置类型别名
-- Partial 改所有键值为可选 `type TPartialUser = Partial<IUser>;`
-- Required 改所有键值为必选 `type TRequiredUser = Required<IUser>;`
-- Readonly 将传入属性变为只读
-- Record `Record<K extends keyof any, T>` 的作用是将 K 中所有的属性的值转化为 T 类型。
+#### Partial 改所有键值为可选 `type TPartialUser = Partial<IUser>;`
+
+```typescript
+// ts 中的实现方式
+type Partial<T> = {
+[P in keyof T]?: T[P];
+};
+
+// 使用方式
+interface IUser {
+name: string;
+age?: number;
+}
+type TPartialUser = Partial<IUser>;
+// 输出的 TPartialUser 结果
+// type TPartialUser = {
+// name?: string | undefined;
+// age?: number | undefined;
+// }
+```  
+
+#### Required 改所有键值为必选 `type TRequiredUser = Required<IUser>;`
+
+```typescript
+// ts 中的实现方式
+type Required<T> = {
+[P in keyof T]-?: T[P];
+};
+// 使用方式
+interface IUser {
+name: string;
+age?: number;
+}
+// 改 IUser 的接口值为均必选
+type TRequiredUser = Required<IUser>;
+// 输出的 TRequiredUser 结果
+// type TRequiredUser = {
+// name: string;
+// age: number;
+// }
+```  
+#### Readonly 将传入属性变为只读
+
+```typescript
+type Readonly<T> = {
+readonly [P in keyof T]: T[P];
+};
+```  
+
+#### Pick 将某个类型中的子属性挑出来，变成包含这个类型部分属性的子类型。
+  
+```typescript
+type Pick<T, K extends keyof T> = {
+  [P in K]: T[P];
+};
+
+interface Todo {
+  title: string;
+  description: string;
+  completed: boolean;
+}
+
+type TodoPreview = Pick<Todo, 'title' | 'completed'>;
+
+const todo: TodoPreview = {
+  title: 'Clean room',
+  completed: false,
+};
+```
+
+#### Record 的作用是将 K 中所有的属性的值转化为 T 类型。
 
 ```typescript
 type Record<K extends keyof any, T> = {
@@ -183,15 +251,29 @@ const x: Record<Page, PageInfo> = {
 };
 ```
 
-- Exclude 将某个类型中属于另一个的类型移除掉
+#### Exclude 将某个类型中属于另一个的类型移除掉
 ```typescript
+type Exclude<T, U> = T extends U ? never : T;
+
 type T0 = Exclude<"a" | "b" | "c", "a">; // "b" | "c"
 ```
 
-- Extract 与 Exclude 恰好相反, 代表取出对应值
+#### Extract 与 Exclude 恰好相反, 代表取出对应值
 ```typescript
+type Extract<T, U> = T extends U ? T : never;
+
 type T0 = Extract<"a" | "b" | "c", "a">; // "a"
 ```
+
+#### ReturnType 的作用是用于获取函数 T 的返回类型。
+```typescript
+type ReturnType<T extends (...args: any) => any> = T extends (
+  ...args: any
+) => infer R
+  ? R
+  : any;  
+```
+
 
 
 ### 其它
