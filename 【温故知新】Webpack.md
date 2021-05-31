@@ -93,8 +93,6 @@ module.exports = DemoWebpackPlugin
 
 ### webpack 的优化
 1. 减少 Webpack 打包时间
-- 代码压缩：UglifyJs
-
 - 优化 Loader：优化范围
   
 ```javascript
@@ -184,6 +182,60 @@ module.exports = {
 ```
 
 2. 减少打包体积
+- 使用 webpack-bundle-analyzer 进行分析
+- uglifyjs 对js、css、进行压缩
 - 按需加载
-- Scope Hoisting：Scope Hoisting 可以分析出模块之间的依赖关系，尽可能把打包出来的模块合并到一个函数中
+- Scope Hoisting：Scope Hoisting 直译过来就是「作用域提升」，可以分析出模块之间的依赖关系，尽可能把打包出来的模块合并到一个函数中
 - Tree Shaking：Tree Shaking 可以删除项目中未被使用的代码
+- 动态Polyfill
+
+3. 缩小构建目标、减少文件搜索范围
+- exclude 与 include的使用：
+- 这个主要是resolve相关的配置，用来设置模块如何被解析。通过resolve的配置，可以帮助Webpack快速查找依赖，也可以替换对应的依赖。
+- resolve.modules：告诉 webpack 解析模块时应该搜索的目录
+- resolve.mainFields：当从 npm 包中导入模块时（例如，import * as React from 'react'），此选项将决定在 package.json 中使用哪个字段导入模块。根据 webpack 配置中指定的 target 不同，默认值也会有所不同
+- resolve.mainFiles：解析目录时要使用的文件名，默认是index
+- resolve.extensions：文件扩展名
+
+4. 利用缓存提升二次构建的速度
+- babel-loader开启缓存 
+```javascript
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: [{
+          loader: "babel-loader",
+          options: {
+            cacheDirectory: true
+          }
+        }],
+      }
+    ]
+  }
+}
+```
+- 使用cache-loader 
+```javascript
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.ext$/,
+        use: [
+          'cache-loader',
+          ...loaders
+        ],
+        include: path.resolve('src')
+      }
+    ]
+  }
+}
+```
+- 使用hard-source-webpack-plugin：
+  配置 hard-source-webpack-plugin后，首次构建时间并不会有太大的变化，
+  但是从第二次开始，构建时间大约可以减少 80%左右。
+
+

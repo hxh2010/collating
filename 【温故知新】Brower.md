@@ -11,6 +11,69 @@ cover: https://hongxh.cn/img/study_img/browser.jpg
 
 ![](https://hongxh.cn/img/study_img/browser.jpg)
 
+
+### 首屏时间和白屏时间
+- 首屏时间 = 白屏时间 + 首屏渲染时间
+- window.performance 用来测量网页和 web 应用程序的性能 api 
+```javascript
+// window.performance 相关字段说明
+// memory 代表JavaScript对内存的占用。
+// navigation字段统计的是一些网页导航相关的数据：
+// 相关时间计算:
+// DNS查询耗时 = domainLookupEnd - domainLookupStart
+// TCP链接耗时 = connectEnd - connectStart
+// request请求耗时 = responseEnd - responseStart
+// 解析dom树耗时 = domComplete - domInteractive
+// 白屏时间 = domloading - fetchStart
+// domready可操作时间 = domContentLoadedEventEnd - fetchStart
+// onload总下载时间 = loadEventEnd - fetchStart
+```
+- widow.performance.getEntries() 统计静态资源相关时间
+
+
+### 首屏优化
+1. **CDN** 内容分发：提取第三方库，静态资源到 cdn
+   CDN是构建在现有网络基础之上的智能虚拟网络，依靠部署在各地的边缘服务器， 
+   通过中心平台的负载均衡、内容分发、调度等功能模块，使用户就近获取所需内容， 
+   降低网络拥塞，提高用户访问响应速度和命中率。CDN的关键技术主要有内容存储和分发技术。
+2. 设置缓存：浏览器一般不会对content-type: application/json 的接口数据进行缓存，需要手动设置。
+   抽取缓存层，请求接口只执行动作，如果缓存有数据先从缓存取。
+3. 静态文件添加缓存：hash + 强缓存 => hash + cache control:max-age = 1年
+- nginx 的话使用 **proxy_cache**
+```shell
+    #要缓存文件的后缀，可以在以下设置。
+    location ~ .*\.(gif|jpg|png|css|js)(.*) {
+            proxy_pass http://ip地址:90;
+            proxy_redirect off;
+            proxy_set_header Host $host;
+            proxy_cache cache_one;
+            proxy_cache_valid 200 302 24h;
+            proxy_cache_valid 301 30d;
+            proxy_cache_valid any 5m;
+            expires 90d;
+            add_header wall  "hey!guys!give me a star.";
+    }
+    ...
+
+    # 无nginx缓存的blog端口
+    server {
+        listen  90;
+        server_name localhost;
+        root /mnt/blog/;
+
+        location / {
+
+        }
+    }
+```
+4. 前端资源动态加载：路由（懒加载）、组件库（按需引入）、图片（懒加载 loading="lazy"）
+5. 减少请求的数量，如果携带 cookie ，尽量减少 cookie 内容
+6. 利用http压缩：nginx 配置 gzip
+7. 引入 http 2.0 提升传输性能。
+8. 图片尽量使用 webp 格式
+9. 利用好script标签的async和defer这两个属性。功能独立且不要求马上执行的js文件，可以加入async属性。如果是优先级低且没有依赖的js，可以加入defer属性。
+
+
 ### 获取页面阅读进度
 ```ecmascript 6
   const { height } = window.screen;
@@ -126,22 +189,6 @@ cover: https://hongxh.cn/img/study_img/browser.jpg
 - Gecko 内核：Netscape6 及以上版本，FF,MozillaSuite/SeaMonkey 等
 - Presto 内核：Opera7 及以上。 [Opera 内核原为：Presto，现为：Blink;]
 - Webkit 内核：Safari,Chrome 等。 [ Chrome 的 Blink（WebKit 的分支）]
-
-
-### 首屏优化
-- 提取第三方库，第三方依赖文件以及打包文件放进 CDN 服务器
-- 对路由进行懒加载
-- 首页白屏添加骨架屏或 loading（仅仅是优化体验）
-- 优化 webpack 减少模块打包体积，code-split 按需加载
-- 服务端渲染，在服务端事先拼装好首页所需的 html
-- 服务端开启 gzip 压缩
-- element-ui 等 UI 框架按需引入
-- 打包文件分包，提取公共文件包
-- 使用文件名增加 hash 名，解决新版本需要清除依赖的问题
-- 代码压缩
-- 压缩图片文件，减少文件体积
-- 图片资源放进 CDN 服务器
-- 使用 CSS 精灵图
 
 
 ### 浏览器事件
