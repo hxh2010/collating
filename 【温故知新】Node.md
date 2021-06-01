@@ -15,7 +15,7 @@ cover: https://hongxh.cn/img/study_img/node.png
 - Node.js 是异步的、事件驱动的、非阻塞的和单线程的，使得它成为开发下面应用程序的完美候选：
 - 实时应用程序，如聊天和提供实时更新的应用程序
 - 将视频或其他多媒体内容流式传输给大量观众的流式应用程序
-- 其他 I/O 密集型应用程序
+- 其他 I/O 密集型应用程序，吞吐量大
 - 遵循微服务架构的网络后端
 
 
@@ -46,15 +46,14 @@ var module = new Module(filename, parent);
 
 
 ### require 与 import 的区别
-1.原生浏览器不支持 require/exports，可使用支持 CommonJS 模块规范的 Browsersify、webpack 等打包工具，它们会将 require/exports 转换成能在浏览器使用的代码。
-2.import/export 在浏览器中无法直接使用，我们需要在引入模块的 3.即使 Node.js 13.2+ 已经支持 import/export，Node.js 官方不建议在正式环境使用，目前可以使用 babel 将 ES6 的模块系统编译成 CommonJS 规范（注意：语法一样，但具体实现还 是 require/exports）
-require/exports 是运行时动态加载，import/export 是静态编译
-require/exports 输出的是一个值的拷贝，import/export 模块输出的是值的引用
-ES6 模块可以在 import 引用语句前使用模块，CommonJS 则需要先引用后使用
-import/export 只能在模块顶层使用，不能在函数、判断语句等代码块之中引用；require/exports 可以
-是否采用严格模式
-import/export 导出的模块默认调用严格模式。
-require/exports 默认不使用严格模式，可以自定义是否使用严格模式
+1. 原生浏览器不支持 require/exports，可使用支持 CommonJS 模块规范的 Browsersify、webpack 等打包工具，它们会将 require/exports 转换成能在浏览器使用的代码。
+2. import/export 在浏览器中无法直接使用，即使 Node.js 13.2+ 已经支持 import/export，Node.js 官方不建议在正式环境使用，
+   目前可以使用 babel 将 ES6 的模块系统编译成 CommonJS 规范（注意：语法一样，但具体实现还 是 require/exports）
+4. require/exports 是运行时动态加载，import/export 是静态编译
+5. require/exports 输出的是一个值的拷贝，import/export 模块输出的是值的引用
+6. ES6 模块可以在 import 引用语句前使用模块，CommonJS 则需要先引用后使用
+7. import/export 只能在模块顶层使用，不能在函数、判断语句等代码块之中引用；require/exports 可以
+8. import/export 导出的模块默认调用严格模式。 require/exports 默认不使用严格模式，可以自定义是否使用严格模式
 
 
 ### package.json 文件

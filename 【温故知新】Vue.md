@@ -46,7 +46,8 @@ cover: https://hongxh.cn/img/study_img/vue.jpeg
 - 为什么在 Vue3.0 采用了 Proxy，抛弃了 Object.defineProperty？
   原因如下：
   Object.defineProperty 无法低耗费的监听到数组下标的变化，导致通过数组下标添加元素，不能实时响应；
-  Object.defineProperty 只能劫持对象的属性，从而需要对每个对象，每个属性进行遍历。如果属性值是对象，还需要深度遍历。 Proxy 可以劫持整个对象， 并返回一个新的对象。
+  Object.defineProperty 只能劫持对象的属性，从而需要对每个对象，每个属性进行遍历。如果属性值是对象，
+  还需要深度遍历。 Proxy 可以劫持整个对象， 并返回一个新的对象。
   Proxy 不仅可以代理对象，还可以代理数组。还可以代理动态增加的属性。
   
 
@@ -220,7 +221,7 @@ cover: https://hongxh.cn/img/study_img/vue.jpeg
 - new Vue() 创建事件中心，$emit / $on
 
 
-### project / inject
+### provide / inject
 - project 钩子用来发送数据或方法
 - inject钩子用来接收数据或方法
 ````javascript
@@ -239,7 +240,9 @@ cover: https://hongxh.cn/img/study_img/vue.jpeg
 
 ### $attrs / $listeners
 - $attrs：继承所有的父组件属性（除了prop传递的属性、class 和 style ），一般用在子组件的子元素上
-- $listeners：该属性是一个对象，里面包含了作用在这个组件上的所有监听器，可以配合 v-on="$listeners" 将所有的事件监听器指向这个组件的某个特定的子元素。（相当于子组件继承父组件的事件）
+- $listeners：该属性是一个对象，里面包含了作用在这个组件上的所有监听器，
+  可以配合 v-on="$listeners" 将所有的事件监听器指向这个组件的某个特定的子元素。
+  （相当于子组件继承父组件的事件）
 
 
 
@@ -253,8 +256,10 @@ cover: https://hongxh.cn/img/study_img/vue.jpeg
 
 
 ### params和query的区别
-- 用法：query要用path来引入，params要用name来引入，接收参数都是类似的，分别是 this.$route.query.name 和 this.$route.params.name 。
-- url地址显示：query更加类似于我们ajax中get传参，params则类似于post，说的再简单一点，前者在浏览器地址栏中显示参数，后者则不显示
+- 用法：query要用path来引入，params要用name来引入，
+  接收参数都是类似的，分别是 this.$route.query.name 和 this.$route.params.name 。
+- url地址显示：query更加类似于我们ajax中get传参，
+  params则类似于post，说的再简单一点，前者在浏览器地址栏中显示参数，后者则不显示
 
 
 ### Vue-router 导航守卫有哪些
@@ -283,4 +288,5 @@ cover: https://hongxh.cn/img/study_img/vue.jpeg
 
 ### 双向绑定和 vuex 是否冲突
 - 当在严格模式中使用 `Vuex` 时，在属于 `Vuex` 的 `state` 上使用 `v-model` 会导致出错。
-- 解决方案：1. 给 `<Input>` 中绑定 value，然后侦听 `input` 或者 `change` 事件，在事件回调中调用一个方法；2. 使用带有 `setter` 的双向绑定计算属性；
+- 解决方案：1. 给 `<Input>` 中绑定 value，然后侦听 `input` 或者 `change` 事件，
+  在事件回调中调用一个方法；2. 使用带有 `setter` 的双向绑定计算属性；

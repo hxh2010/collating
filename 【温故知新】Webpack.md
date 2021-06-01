@@ -14,16 +14,21 @@ cover: https://hongxh.cn/img/study_img/webpack.png
 ### bundle 、chunk 、module 的理解
 1. bundle 是webpack打包出来的文件
   - bundle通常是由多个不同的模块产生，它是已经加载完毕和被编译后的源代码的最终版本。
-  - bundle splitting: 这是webpack优化代码的一种方法，即将一个单独的应用拆解为多个 bundle。通过将多个bundle中公共引入的模块拆解出来，我们可以减少项目的代码量，从而减小应用的体积，并且通过浏览器缓存，我们可以将代码进一步优化。
+  - bundle splitting: 这是webpack优化代码的一种方法，即将一个单独的应用拆解为多个 bundle。
+    通过将多个bundle中公共引入的模块拆解出来，我们可以减少项目的代码量，
+    从而减小应用的体积，并且通过浏览器缓存，我们可以将代码进一步优化。
 2. chunk 是webpack在进行模块的依赖分析的时候，代码分割出来的代码块。
-   - chunk 这个webpack中专用的术语用于管理webpack内部的打包进程。bundle由许多chunk组成，chunk有几种类型，比如说“入口”和“子块”。通常chunk和输出的bundle一一对应，但是，有些是一对多的关系。
+   - chunk 这个webpack中专用的术语用于管理webpack内部的打包进程。bundle由许多chunk组成，
+     chunk有几种类型，比如说“入口”和“子块”。通常chunk和输出的bundle一一对应，但是，有些是一对多的关系。
 3. module是开发中的单个模块，我自己的理解是单个文件。
 
-- module 就是没有被编译之前的代码，通过 webpack 的根据文件引用关系生成 chunk 文件，webpack 处理好 chunk 文件后，生成运行在浏览器中的代码 bundle
+- module 就是没有被编译之前的代码，通过 webpack 的根据文件引用关系生成 chunk 文件，
+  webpack 处理好 chunk 文件后，生成运行在浏览器中的代码 bundle
 
 
 ### source map 的理解
-- 简单说，Source map就是一个信息文件，里面储存着位置信息。也就是说，转换后的代码的每一个位置，所对应的转换前的位置。 有了它，出错的时候，除错工具将直接显示原始代码，而不是转换后的代码。这无疑给开发者带来了很大方便。
+- 简单说，Source map就是一个信息文件，里面储存着位置信息。也就是说，转换后的代码的每一个位置，
+  所对应的转换前的位置。 有了它，出错的时候，除错工具将直接显示原始代码，而不是转换后的代码。这无疑给开发者带来了很大方便。
 - source map 是将编译、打包、压缩后的代码映射回源代码的过程。打包压缩后的代码不具备良好的可读性，想要调试源码就需要 soucre map。
 - map文件只要不打开开发者工具，浏览器是不会加载的。
 - 线上环境一般有三种处理方案：
@@ -47,7 +52,8 @@ module.exports = function (source) {
 ```
 
 ### plugin 的理解
-- webpack在运行的生命周期中会广播出许多事件，plugin 可以监听这些事件，在特定的阶段钩入想要添加的自定义功能。Webpack 的 Tapable 事件流机制保证了插件的有序性，使得整个系统扩展性良好。
+- webpack在运行的生命周期中会广播出许多事件，plugin 可以监听这些事件，在特定的阶段钩入想要添加的自定义功能。
+  Webpack 的 Tapable 事件流机制保证了插件的有序性，使得整个系统扩展性良好。
 - 一般都是new Plugin()这种形式使用，所以，首先应该明确的是，plugin应该是一个类。
 
 ```javascript
@@ -139,7 +145,8 @@ export default {
 }
 ```
 
-- DllPlugin：DllPlugin 可以将特定的类库提前打包然后引入。这种方式可以极大的减少打包类库的次数，只有当类库更新版本才有需要重新打包，并且也实现了将公共代码抽离成单独文件的优化方案。
+- DllPlugin：DllPlugin 可以将特定的类库提前打包然后引入。这种方式可以极大的减少打包类库的次数，
+  只有当类库更新版本才有需要重新打包，并且也实现了将公共代码抽离成单独文件的优化方案。
 
 ```javascript
 // 单独配置在一个文件中
@@ -193,7 +200,8 @@ module.exports = {
 - exclude 与 include的使用：
 - 这个主要是resolve相关的配置，用来设置模块如何被解析。通过resolve的配置，可以帮助Webpack快速查找依赖，也可以替换对应的依赖。
 - resolve.modules：告诉 webpack 解析模块时应该搜索的目录
-- resolve.mainFields：当从 npm 包中导入模块时（例如，import * as React from 'react'），此选项将决定在 package.json 中使用哪个字段导入模块。根据 webpack 配置中指定的 target 不同，默认值也会有所不同
+- resolve.mainFields：当从 npm 包中导入模块时（例如，import * as React from 'react'），
+  此选项将决定在 package.json 中使用哪个字段导入模块。根据 webpack 配置中指定的 target 不同，默认值也会有所不同
 - resolve.mainFiles：解析目录时要使用的文件名，默认是index
 - resolve.extensions：文件扩展名
 

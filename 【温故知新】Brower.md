@@ -18,7 +18,7 @@ cover: https://hongxh.cn/img/study_img/browser.jpg
 ```javascript
 // window.performance 相关字段说明
 // memory 代表JavaScript对内存的占用。
-// navigation字段统计的是一些网页导航相关的数据：
+// navigation 字段统计的是一些网页导航相关的数据：
 // 相关时间计算:
 // DNS查询耗时 = domainLookupEnd - domainLookupStart
 // TCP链接耗时 = connectEnd - connectStart

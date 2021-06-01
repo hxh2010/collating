@@ -134,8 +134,10 @@ console.log(uncurryAdd(1, 2, 3)); // 6
 
 ### 3. 装饰器
 - 装饰器是对类、函数、属性之类的一种装饰，可以针对其添加一些额外的行为。装饰器的本质是函数。
+
 ### 4. 高阶函数 （Higher-order function）
 - 接收其它函数作为参数的函数就称之为高阶函数。常用的高阶函数有： map, sort, reduce, filter等等
+
 ### 5. 高阶组件（Higher-order component）
 - 接收一个组件，并返回一个外包组件。
 ```javascript
