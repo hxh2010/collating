@@ -14,7 +14,7 @@ cover: https://hongxh.cn/img/study_img/ts.jpeg
 
 ### Ts 是什么
 - TypeScript 是 JavaScript 的一个超集，其静态类型检查可以让开发者在开发阶段就可以发现代码中隐藏的错误，弥补了 JS 的不足。
-  而且 TypeScript 提供最新的和不断发展的 JavaScript 特性，开发的时候你可以愉快的使用这些新特性，
+  而且 TypeScript 提供最新的和不断发展的 JavaScript 特性，开发的时候你可以愉快使用这些新特性，
   TS 编译后会转为浏览器可以直接运行的 JavaScript 代码
 
 
@@ -267,8 +267,8 @@ type T0 = Extract<"a" | "b" | "c", "a">; // "a"
 
 #### ReturnType 的作用是用于获取函数 T 的返回类型。
 ```typescript
-type ReturnType<T extends (...args: any) => any> = T extends (
-  ...args: any
+type ReturnType<T extends (...args: any[]) => any> = T extends (
+  ...args: any[]
 ) => infer R
   ? R
   : any;  
@@ -342,7 +342,7 @@ console.log(B() ?? C());
 
 
 ### .d.ts 声明文件作用
-- 当使用第三方库时，我们需要引用它的声明文件，才能获得对应的代码补全、接口提示等功能。
+- 当使用第三方库时，我们需要引用它的声明文件，才能获得对应的代码提示等功能。
   - declare var 声明全局变量
   - declare function 声明全局方法
   - declare class 声明全局类

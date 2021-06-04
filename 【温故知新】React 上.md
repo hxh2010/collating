@@ -128,8 +128,10 @@ cover: https://hongxh.cn/img/study_img/react.png
 
 
 ### 为什么只能在最外层使用 hooks
-- 官网：确保总是在你的 React 函数的最顶层以及任何 return 之前调用他们。遵守这条规则，你就能确保 Hook 在每一次渲染中都按照同样的顺序被调用。
-- 因为底层存放 hooks 的是在 fiber 对象的 memoizedState 数组里按照 hooks 的定义顺序存入，每一个 hooks 的 next 都会指向下一个，如果 hooks 顺序变化，memoizedState 并不会感知
+- 官网：确保总是在你的 React 函数的最顶层以及任何 return 之前调用他们。
+  遵守这条规则，你就能确保 Hook 在每一次渲染中都按照同样的顺序被调用。
+- 因为底层存放 hooks 的是在 fiber 对象的 memoizedState 
+  数组里按照 hooks 的定义顺序存入，每一个 hooks 的 next 都会指向下一个，如果 hooks 顺序变化，memoizedState 并不会感知
 
 
 ### 自定义的 Hook 是如何影响使用它的函数组件的？
@@ -156,17 +158,19 @@ cover: https://hongxh.cn/img/study_img/react.png
 ### React-Router 的实现原理是什么？
 - 客户端路由实现的思想：
   - 基于 hash 的路由：通过监听 hashchange 事件，感知 hash 的变化，改变 hash 可以直接通过 location.hash=xxx
-  - 基于 H5 history 路由： 改变 url 可以通过 history.pushState 和 resplaceState 等，会将 URL 压入堆栈，同时能够应用 history.go() 等 API 监听 url 的变化可以通过自定义事件触发实现
+  - 基于 H5 history 路由： 
+    改变 url 可以通过 history.pushState 和 resplaceState 等，
+    会将 URL 压入堆栈，同时能够应用 history.go() 等 API 监听 url 的变化可以通过自定义事件触发实现
 - 基于 history 库来实现上述不同的客户端路由实现思想，并且能够保存历史记录等，磨平浏览器差异，上层无感知
 - 通过维护的列表，在每次 URL 发生变化的回收，通过配置的 路由路径，匹配到对应的 Component，并且 render
 
 
-### router 里 <Link> 标签和 <a> 标签有什么区别
-- 从最终渲染的 DOM 来看，这两者都是链接，都是 <a> 标签，区别是：
-  <Link> 是 react-router 里实现路由跳转的链接，一般配合 Route 使用，
+### router 里 Link 标签和 a 标签有什么区别
+- 从最终渲染的 DOM 来看，这两者都是链接，都是 a 标签，区别是：
+   Link 是 react-router 里实现路由跳转的链接，一般配合 Route 使用，
   react-router 接管了其默认的链接跳转行为，区别于传统的页面跳转，
-  <Link> 的“跳转”行为只会触发相匹配的 Route 对应的页面内容更新，而不会刷新整个页面。
-- 而 <a> 标签就是普通的超链接了，用于从当前页面跳转到 href 指向的另一个页面（非锚点情况）。
+   Link 的“跳转”行为只会触发相匹配的 Route 对应的页面内容更新，而不会刷新整个页面。
+- 而 a 标签就是普通的超链接了，用于从当前页面跳转到 href 指向的另一个页面（非锚点情况）。
 
 
 
@@ -192,17 +196,23 @@ cover: https://hongxh.cn/img/study_img/react.png
 
 
 ### redux 什么是纯函数 为什么 reducer 是纯函数
-- 因为比较两个 javascript 对象中所有的属性是否完全相同，唯一的办法就是深比较，然而，深比较在真实的应用中代码是非常大的，非常耗性能的，需要比较的次数特别多，所以一个有效的解决方案就是做一个规定，当无论发生任何变化时，开发者都要返回一个新的对象，没有变化时，开发者返回就的对象，这也就是 redux 为什么要把 reducer 设计成纯函数的原因。
+- 因为比较两个 javascript 对象中所有的属性是否完全相同，唯一的办法就是深比较，
+  然而，深比较在真实的应用中代码是非常大的，非常耗性能的，需要比较的次数特别多，
+  所以一个有效的解决方案就是做一个规定，当无论发生任何变化时，
+  开发者都要返回一个新的对象，没有变化时，开发者返回就的对象，
+  这也就是 redux 为什么要把 reducer 设计成纯函数的原因。
 
 
 ### Redux 和 Vuex 有什么区别，它们的共同思想
 1. Redux 和 Vuex 区别
-
-- Vuex 改进了 Redux 中的 Action 和 Reducer 函数，以 mutations 变化函数取代 Reducer，无需 switch，只需在对应的 mutation 函数里改变 state 值即可
+- Vuex 改进了 Redux 中的 Action 和 Reducer 函数，以 mutations 变化函数取代 Reducer，
+  无需 switch，只需在对应的 mutation 函数里改变 state 值即可
 - Vuex 由于 Vue 自动重新渲染的特性，无需订阅重新渲染函数，只要生成新的 State 即可
-- Vuex 数据流的顺序是 ∶View 调用 store.commit 提交对应的请求到 Store 中对应的 mutation 函数->store 改变（vue 检测到数据变化自动渲染）
-
-通俗点理解就是，vuex 弱化 dispatch，通过 commit 进行 store 状态的一次更变;取消了 action 概念，不必传入特定的 action 形式进行指定变更;弱化 reducer，基于 commit 参数直接对数据进行转变，使得框架更加简易; 2. 共同思想
+- Vuex 数据流的顺序是 ∶View 调用 store.commit 提交对应的请求到 Store 中对应的
+  mutation 函数->store 改变（vue 检测到数据变化自动渲染）
+- 通俗点理解就是，vuex 弱化 dispatch，通过 commit 进行 store 状态的一次更变;
+  取消了 action 概念，不必传入特定的 action 形式进行指定变更;
+  弱化 reducer，基于 commit 参数直接对数据进行转变，使得框架更加简易; 2. 共同思想
 
 - 单—的数据源
 - 变化可以预测

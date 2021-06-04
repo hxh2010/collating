@@ -20,13 +20,13 @@ cover: https://hongxh.cn/img/study_img/browser.jpg
 // memory 代表JavaScript对内存的占用。
 // navigation 字段统计的是一些网页导航相关的数据：
 // 相关时间计算:
-// DNS查询耗时 = domainLookupEnd - domainLookupStart
-// TCP链接耗时 = connectEnd - connectStart
-// request请求耗时 = responseEnd - responseStart
-// 解析dom树耗时 = domComplete - domInteractive
+// DNS 查询耗时 = domainLookupEnd - domainLookupStart
+// TCP 链接耗时 = connectEnd - connectStart
+// request 请求耗时 = responseEnd - responseStart
+// 解析 dom 树耗时 = domComplete - domInteractive
 // 白屏时间 = domloading - fetchStart
-// domready可操作时间 = domContentLoadedEventEnd - fetchStart
-// onload总下载时间 = loadEventEnd - fetchStart
+// domready 可操作时间 = domContentLoadedEventEnd - fetchStart
+// onload 总下载时间 = loadEventEnd - fetchStart
 ```
 - widow.performance.getEntries() 统计静态资源相关时间
 

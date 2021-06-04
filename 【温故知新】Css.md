@@ -11,6 +11,42 @@ cover: https://hongxh.cn/img/study_img/css.png
 
 ![](https://hongxh.cn/img/study_img/css.png)
 
+### css 实现三角形
+```css
+/* 4个三角形 */
+.square{
+  width:0;
+  height: 0;
+  border-width:100px;
+  border-style: solid;
+  border-color: red yellow green blue;
+}
+
+/*正三角*/
+.triangle {
+  width: 0;
+  height: 0;
+  border-right: 50px solid transparent;
+  border-left: 50px solid transparent;
+  border-bottom: 100px solid purple;
+}
+```
+
+
+### css 实现扇形
+```css
+/*pieChart 饼状图 4个扇形 */
+.pieChart {
+  width: 0;
+  height: 0;
+  border-width: 100px;
+  border-style: solid;
+  border-color: red yellow green blue;
+  border-radius: 100px;
+}
+```
+
+
 ### 实现 div 的固定宽高比
 - height: auto:若div中只有img标签,且需要div按照图片长宽比自动缩放，则只需将img和div的height均设置为auto即可
 - height + padding-bottom
