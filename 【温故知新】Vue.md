@@ -13,6 +13,29 @@ cover: https://hongxh.cn/img/study_img/vue.jpeg
 
 # Vue
 
+### vue 生命周期
+- new Vue()
+- init: Events & Lifecycle
+- `beforeCreate`: 在实例初始化之后，数据观测 (data observer) 和 event/watcher 事件配置之前被调用。
+- init: injections & reactivity
+- `created`: 在实例创建完成后被立即调用。在这一步，实例已完成以下的配置：
+  数据观测 (data observer)，property 和方法的运算，watch/event 事件回调。
+  然而，挂载阶段还没开始，$el property 目前尚不可用。
+- 判断 el template render，最后都转成 ast
+- `beforeMount`: 在挂载开始之前被调用：相关的 render 函数首次被调用。
+- `mounted`: 实例被挂载后调用，这时 el 被新创建的 vm.$el 替换了。
+  如果根实例挂载到了一个文档内的元素上，当 mounted 被调用时 vm.$el 也在文档内。 
+  注意 mounted 不会保证所有的子组件也都一起被挂载。如果你希望等到整个视图都渲染完毕，
+  可以在 mounted 内部使用 vm.$nextTick：
+- `beforeDestroy`: 实例销毁之前调用。在这一步，实例仍然完全可用。
+- `destroyed`: 实例销毁后调用。该钩子被调用后，对应 Vue 实例的所有指令都被解绑，所有的事件监听器被移除，所有的子实例也都被销毁。
+- 更新: 
+  - `beforeUpdate`: 数据更新时调用，发生在虚拟 DOM 打补丁之前。这里适合在更新之前访问现有的 DOM，比如手动移除已添加的事件监听器。
+  - `update`: 由于数据更改导致的虚拟 DOM 重新渲染和打补丁，在这之后会调用该钩子。 
+    当这个钩子被调用时，组件 DOM 已经更新，所以你现在可以执行依赖于 DOM 的操作。然而在大多数情况下，你应该避免在此期间更改状态。
+    如果要相应状态改变，通常最好使用计算属性或 watcher 取而代之。 注意 updated 不会保证所有的子组件也都一起被重绘。
+    如果你希望等到整个视图都重绘完毕，可以在 updated 里使用 vm.$nextTick
+
 ### vue 渲染流程
 - new Vue()：初始化
 - => $mount ：调用mount 挂载组件
@@ -252,10 +275,10 @@ cover: https://hongxh.cn/img/study_img/vue.jpeg
 
 
 ### Vue-router跳转和location.href有什么区别
-- 静态跳转，刷新跳转
+- 静态跳转，刷新跳转，vue-router 可对相关路由模式进行实现
 
 
-### params和query的区别
+### params 和 query 的区别
 - 用法：query要用path来引入，params要用name来引入，
   接收参数都是类似的，分别是 this.$route.query.name 和 this.$route.params.name 。
 - url地址显示：query更加类似于我们ajax中get传参，

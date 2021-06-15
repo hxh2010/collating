@@ -14,11 +14,11 @@ cover: https://hongxh.cn/img/study_img/html.png
 ### 行内元素和行内块元素的区别
 - 行内：
   - 设置宽高无效
-  - 对 margin 仅设置左右方向有效，上下无效；padding 设置上下左右都有效
+  - 对 margin 仅设置左右有效，上下无效；padding 设置上下左右都有效
   - 不会自动进行换行
 
 
-### html5 有哪些新特性、移除了那些元素？如何处理 HTML5 新标签的浏览器兼容问题？如何区分 HTML 和 HTML5？
+### html5 有哪些新特性、移除了那些元素？
 - HTML5 现在已经不是 SGML 的子集，主要是关于图像，位置，存储，多任务等功能的增加
   - 绘画 canvas
   - 用于媒介回放的 video 和 audio 元素
@@ -34,7 +34,6 @@ cover: https://hongxh.cn/img/study_img/html.png
   - IE8/IE7/IE6 支持通过 document.createElement 方法产生的标签
   - 可以利用这一特性让这些浏览器支持 HTML5 新标签
   - 浏览器支持新标签后，还需要添加标签默认的样式
-- 当然也可以直接使用成熟的框架、比如 html5shim
 
 
 ### iframe 有哪些优点和缺点？
@@ -50,9 +49,15 @@ cover: https://hongxh.cn/img/study_img/html.png
 
 
 ### Service Workers/Web Workers/WebSockets 的区别
-- Service Worker:处理网络请求的后台服务。完美的离线情况下后台同步或推送通知的处理方案。不能直接与 DOM 交互。通信（页面和 ServiceWorker 之间）得通过 postMessage 方法
-- Web Worker:模仿多线程，允许复杂的脚本在后台运行，所以它们不会阻止其他脚本的运行。是保持您的 UI 响应的同时也执行处理器密集型功能的完美解决方案。不能直接与 DOM 交互。通信必须通过 postMessage 方法
-- WebSocket:在客户端和服务器之间创建一个开放的连接，允许在一个连接上进行双向通信。是你目前使用长轮询的任何情况，比如聊天软件、在线游戏，或运动代码的完美解决方案。可以直接与 DOM 交互。通信是通过 WebSocket 的 send 方法。
+- Service Worker
+  处理网络请求的后台服务。完美的离线情况下后台同步或推送通知的处理方案。
+  不能直接与 DOM 交互。通信（页面和 ServiceWorker 之间）得通过 postMessage 方法
+- Web Worker
+  模仿多线程，允许复杂的脚本在后台运行，所以它们不会阻止其他脚本的运行。
+  是保持您的 UI 响应的同时也执行处理器密集型功能的完美解决方案。不能直接与 DOM 交互。通信必须通过 postMessage 方法
+- WebSocket
+  在客户端和服务器之间创建一个开放的连接，允许在一个连接上进行双向通信。
+  是你目前使用长轮询的任何情况，比如聊天软件、在线游戏，或运动代码的完美解决方案。可以直接与 DOM 交互。通信是通过 WebSocket 的 send 方法。
 
 
 
