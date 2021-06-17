@@ -87,7 +87,8 @@ if (isFish(pet)) {
 ### 交叉类型和联合类型
 - 联合类型 `let a: number | string | undefined`
 - 类型别名 `type A = number | string | undefined`
-- 交叉类型 交叉类型是将多个类型合并为一个类型。 这让我们可以把现有的多种类型叠加到一起成为一种类型，它包含了所有类型的特性。
+- 交叉类型 交叉类型是将多个类型合并为一个类型。 `Person & Serializable & Loggable`
+  这让我们可以把现有的多种类型叠加到一起成为一种类型，它包含了所有类型的特性。
 
 
 ### 类型 type 和接口 interface 的区别

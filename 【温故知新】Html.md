@@ -49,9 +49,21 @@ cover: https://hongxh.cn/img/study_img/html.png
 
 
 ### Service Workers/Web Workers/WebSockets 的区别
-- Service Worker
-  处理网络请求的后台服务。完美的离线情况下后台同步或推送通知的处理方案。
-  不能直接与 DOM 交互。通信（页面和 ServiceWorker 之间）得通过 postMessage 方法
+#### Service Worker
+- 简介：
+  Service Worker从英文翻译过来就是一个服务工人，服务于前端页面的后台线程，基于Web Worker实现。
+  有着独立的js运行环境，分担、协助前端页面完成前端开发者分配的需要在后台悄悄执行的任务。
+  基于它可以实现拦截和处理网络请求、消息推送、静默更新、事件同步等服务。
+- 注意事项：
+  1. Service Worker线程运行的是js，有着独立的js环境，不能直接操作DOM树，但可以通过postMessage与其服务的前端页面通信。 
+  2. Service Worker服务的不是单个页面，它服务的是当前网络path下所有的页面，只要当前path 的Service Worker被安装， 用户访问当前path下的任意页面均会启动该Service Worker。当一段时间没有事件过来，浏览器会自动停止Service Worker来节约资源， 所以Service Worker线程中不能保存需要持久化的信息。 
+  3. Service Worker安装是在后台悄悄执行，更新也是如此。 每次新唤起Service Worker线程，它都会去检查Service Worker脚本是否有更新，如有一个字节的变化，它都会新
+- 优势及典型应用场景:
+  1. 离线缓存：可以将H5应用中不变化的资源或者很少变化的资源长久的存储在用户端，提升加载速度、降低流量消耗、降低服务器压力。如中重度的H5游戏、框架数据独立的web资讯客户端、web邮件客户端等 
+  2. 消息推送：激活沉睡的用户，推送即时消息、公告通知，激发更新等。如web资讯客户端、web即时通讯工具、h5游戏等运营产品。 
+  3. 事件同步：确保web端产生的任务即使在用户关闭了web页面也可以顺利完成。如web邮件客户端、web即时通讯工具等。 
+  4. 定时同步：周期性的触发Service Worker脚本中的定时同步事件，可借助它提前刷新缓存内容。如web资讯客户端。
+
 - Web Worker
   模仿多线程，允许复杂的脚本在后台运行，所以它们不会阻止其他脚本的运行。
   是保持您的 UI 响应的同时也执行处理器密集型功能的完美解决方案。不能直接与 DOM 交互。通信必须通过 postMessage 方法
@@ -62,6 +74,7 @@ cover: https://hongxh.cn/img/study_img/html.png
 
 
 ### 什么是 CSP？
-- CSP（Content-Security-Policy）指的是内容安全策略，它的本质是建立一个白名单，告诉浏览器哪些外部资源可以加载和执行。我们只需要配置规则，如何拦截由浏览器自己来实现。
+- CSP（Content-Security-Policy）指的是内容安全策略，它的本质是建立一个白名单，告诉浏览器哪些外部资源可以加载和执行。
+  我们只需要配置规则，如何拦截由浏览器自己来实现。
   通常有两种方式来开启 CSP，一种是设置 HTTP 首部中的 Content-Security-Policy，一种是设置 meta 标签的方式 `<meta http-equiv="Content-Security-Policy">`
   CSP 也是解决 XSS 攻击的一个强力手段。

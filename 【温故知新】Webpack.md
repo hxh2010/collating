@@ -38,7 +38,7 @@ cover: https://hongxh.cn/img/study_img/webpack.png
 - 注意：避免在生产中使用 inline- 和 eval-，因为它们会增加 bundle 体积大小，并降低整体性能。
 
 
-### loader 的理解
+###  loader 的理解
 - loader本质上就是一个函数，这个函数会在我们在我们加载一些文件时执行
 - loader 支持链式调用，所以开发上需要严格遵循“单一职责”，每个 Loader 只负责自己需要负责的事情。
 
@@ -51,7 +51,7 @@ module.exports = function (source) {
 }
 ```
 
-### plugin 的理解
+###  plugin 的理解
 - webpack在运行的生命周期中会广播出许多事件，plugin 可以监听这些事件，在特定的阶段钩入想要添加的自定义功能。
   Webpack 的 Tapable 事件流机制保证了插件的有序性，使得整个系统扩展性良好。
 - 一般都是new Plugin()这种形式使用，所以，首先应该明确的是，plugin应该是一个类。

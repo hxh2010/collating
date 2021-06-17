@@ -307,7 +307,8 @@ export default hoc(Base);
 - 读取、操作原组合的state
 - 渲染劫持
 ##### 总结  
-- 属性代理是从“组合”的角度出发，这样有利于从外部去操作 WrappedComponent，可以操作的对象是 props，或者在 WrappedComponent 外面加一些拦截器，控制器等。
+- 属性代理是从“组合”的角度出发，这样有利于从外部去操作 WrappedComponent，
+  可以操作的对象是 props，或者在 WrappedComponent 外面加一些拦截器，控制器等。
 - 反向继承则是从“继承”的角度出发，是从内部去操作 WrappedComponent，也就是可以操作组件内部的 state ，生命周期，render函数等等。
 - 通过反向继承方法实现的高阶组件相较于属性代理实现的高阶组件，功能更强大，个性化程度更高，因此能适应更多的场景。  
 

@@ -50,7 +50,7 @@ cover: https://hongxh.cn/img/study_img/react.png
 
 ### props.children 和 React.Children 有什么区别
 - 在 React 中，当涉及组件嵌套，在父组件中使用 props.children 把所有子组件显示出来
-- React.Children.map 方法让我们对父组件的所有子组件又更灵活的控制。另外还有 foreach 等方法
+- React.Children.map 方法让我们对父组件的所有子组件又更灵活地控制。另外还有 foreach 等方法
 - JavaScript 中的 map 不会对为 null 或者 undefined 的数据进行处理，
   而 React.Children.map 中的 map 可以处理 React.Children 为 null 或者 undefined 的情况。
 
@@ -72,7 +72,7 @@ cover: https://hongxh.cn/img/study_img/react.png
   
 ### 说说 Render Props、HOC
 - HOC
-  - HOC）是 React 中用于复用组件逻辑的一种高级技巧。
+  - HOC 是 React 中用于复用组件逻辑的一种高级技巧。
 - RenderProps
   - 指一种在 React 组件之间使用一个值为函数的 prop 共享代码的简单技术
   - 更具体地说，render prop 是一个用于告知组件需要渲染什么内容的函数 prop。

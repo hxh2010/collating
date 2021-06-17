@@ -46,8 +46,9 @@ var module = new Module(filename, parent);
 
 
 ### require 与 import 的区别
-1. 原生浏览器不支持 require/exports，可使用支持 CommonJS 模块规范的 Browsersify、webpack 等打包工具，它们会将 require/exports 转换成能在浏览器使用的代码。
-2. import/export 在浏览器中无法直接使用，即使 Node.js 13.2+ 已经支持 import/export，Node.js 官方不建议在正式环境使用，
+1. 原生浏览器不支持 require/exports，可使用支持 CommonJS 模块规范的 Browsersify、webpack 等打包工具，
+   它们会将 require/exports 转换成能在浏览器使用的代码。
+2. import/export 在浏览器中无法直接使用，即使 Node.js 13.2+ 已经支持 import / export，Node.js 官方不建议在正式环境使用，
    目前可以使用 babel 将 ES6 的模块系统编译成 CommonJS 规范（注意：语法一样，但具体实现还 是 require/exports）
 4. require/exports 是运行时动态加载，import/export 是静态编译
 5. require/exports 输出的是一个值的拷贝，import/export 模块输出的是值的引用

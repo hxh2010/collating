@@ -39,8 +39,9 @@ cover: https://hongxh.cn/img/study_img/browser.jpg
 2. 设置缓存：浏览器一般不会对content-type: application/json 的接口数据进行缓存，需要手动设置。
    抽取缓存层，请求接口只执行动作，如果缓存有数据先从缓存取。
 3. 静态文件添加缓存：hash + 强缓存 => hash + cache control:max-age = 1年
+
 - nginx 的话使用 **proxy_cache**
-```shell
+```bash
     #要缓存文件的后缀，可以在以下设置。
     location ~ .*\.(gif|jpg|png|css|js)(.*) {
             proxy_pass http://ip地址:90;
@@ -53,7 +54,8 @@ cover: https://hongxh.cn/img/study_img/browser.jpg
             expires 90d;
             add_header wall  "hey!guys!give me a star.";
     }
-    ...
+    # ...
+    # ...
 
     # 无nginx缓存的blog端口
     server {
