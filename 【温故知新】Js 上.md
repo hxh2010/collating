@@ -11,6 +11,46 @@ cover: https://hongxh.cn/img/study_img/js.jpg
 
 ![](https://hongxh.cn/img/study_img/js.jpg)
 
+### 手写 bind、call、apply
+```javascript
+// call
+Function.prototype.myCall = function (context) {
+  context = context ? Object(context) : window
+  context.fn = this // 重置上下文
+  let args = [...arguments].slice(1) // 截取参数a,b
+  let r = context.fn(...args) // 执行函数
+  delete context.fn // 删除属性，避免污染
+  return r // 返回结果
+}
+
+// apply
+Function.prototype.myApply = function (context) {
+  context = context ? Object(context) : window
+  context.fn = this
+  let args = [...arguments][1]
+  if (!args) {
+    return context.fn()
+  }
+  let r = context.fn(...args)
+  delete context.fn;
+  return r
+}
+
+// bind
+Function.prototype.myBind = function (context) {
+  var self = this;
+  // 获取bind2函数从第二个参数到最后一个参数
+  var args = Array.prototype.slice.call(arguments, 1);
+
+  return function () {
+    // 这个时候的arguments是指bind返回的函数传入的参数
+    var bindArgs = Array.prototype.slice.call(arguments);
+    self.apply(context, args.concat(bindArgs));
+  }
+}
+```
+
+
 ### 手写 promise 
 ```javascript
 const PENDING = 'PENDING';
