@@ -121,16 +121,18 @@ Promise.prototype.all = function (list) {
   return new Promise((resolve, reject) => {
     let resValues = [];
     let counts = 0;
-    for (let [i, p] of list) {
-      resolve(p).then(res => {
-        counts++;
-        resValues[i] = res;
-        if (counts === list.length) {
-          resolve(resValues)
-        }
-      }, err => {
-        reject(err)
-      })
+    for (let i = 0;i < list.length;i++) {
+      (function(i){
+        Promise.resolve(promises[i]).then(function(value){
+          countNum++;
+          resolvedvalue[i]=value;
+          if(countNum === promiseNum){
+            return resolve(resolvedvalue)
+          }
+        },function(reason) {
+          return reject(reason)
+        })
+      })(i)
     }
   })
 }
