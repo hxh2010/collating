@@ -35,13 +35,16 @@ cover: https://hongxh.cn/img/study_img/vue.jpeg
     如果你希望等到整个视图都重绘完毕，可以在 updated 里使用 vm.$nextTick
 
 ### vue 渲染流程
-- new Vue()：初始化
+
+![](https://hongxh.cn/img/study_img/vue_render.jpeg)
+
+- new Vue()：初始化，initstate 数据响应化
 - => $mount ：调用mount 挂载组件
 - => compile()：
-  - parse：解析，把模板解析为 ast 的抽象语法树，ast 类似 js 对象，它可以描述所有节点（特别像 vdom ）
-  - optimize：优化，对 ast 做静态节点标记，跳过指令等
-  - generate：代码生成，把 ast 生成代码字符串
-- => render function：渲染函数
+  - parse：解析，把模板解析为对象 ast 的抽象语法树（js 对象对模板的描述），ast 类似 js 对象，它可以描述所有节点（特别像 vdom ）
+  - optimize：优化，对 ast 做静态节点标记（界面中不会变的），diff 时可直接跳过， 标记指令等
+  - generate：代码生成，把 ast 转换为代码字符串
+- => render  new Function(把上面的 code 传进来)：渲染函数
   - getter：在创建组件的时候对 data 进行遍历，创建 watcher 添加到对应的 dep 依赖收集中
   - set 的时候执行 notify 通知 dep 对应的 update 方法
   - 然后重新打补丁 patch 生成新的 vdom ，diff 比对映射到界面中
@@ -90,6 +93,7 @@ cover: https://hongxh.cn/img/study_img/vue.jpeg
 
 
 ### 口述 diff
-- diff 是什么：算法
-- diff 的来由：对比出差异
-- diff 怎么做的：
+- 是什么：算法，由 vddom 计算出最小差异
+- 优势：性能、跨平台、兼容性
+- 在什么地方：patch，在执行打补丁的时候，存在新旧 vdom  
+- 怎么做的：深度优先，同级比较：顶级节点开始比较，如果是元素，就看有没有孩子，有孩子就向下递归，比较孩子的过程中涉及到重排算法（4种可能），四个指针比较
