@@ -64,6 +64,37 @@ cover: https://hongxh.cn/img/study_img/http.jpg
 
 # 相关问题
 
+### option 请求
+> 规范要求，对那些可能对服务器数据产生副作用的 HTTP 请求方法（特别是 GET 以外的 HTTP 请求，或者搭配某些 MIME 类型的 POST 请求），
+> 浏览器必须首先使用 OPTIONS 方法发起一个预检请求（preflight request），从而获知服务端是否允许该跨域请求。
+> 服务器确认允许之后，才发起实际的 HTTP 请求。 “需预检的请求”要求必须首先使用 OPTIONS   方法发起一个预检请求到服务器，
+> 以获知服务器是否允许该实际请求。 
+
+- 当请求满足下述任一条件时，即应首先发送预检请求（使用OPTIONS）：
+1. 使用了下面任一 HTTP 方法：
+- PUT
+- DELETE
+- CONNECT
+- OPTIONS
+- TRACE
+- PATCH
+
+2. 人为设置了对 CORS 安全的首部字段集合之外的其他首部字段。该集合为：
+- Accept
+- Accept-Language
+- Content-Language
+- Content-Type (but note the additional requirements below)
+- DPR
+- Downlink
+- Save-Data
+- Viewport-Width
+- Width
+
+3. Content-Type 的值不属于下列之一:
+- application/x-www-form-urlencoded
+- multipart/form-data
+- text/plain
+
 ### 前端对 http 的优化
 - 减少静态资源文件大小
 - Content-Encoding: gzip

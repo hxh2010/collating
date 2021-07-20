@@ -15,9 +15,7 @@ cover: https://hongxh.cn/img/study_img/css.png
 ```html
 <!--padding-bottom 100% 比例为1：1，30% 为 10：3-->
 <div style="width: 50%;height:50vh;border: 1px solid red">
-  <div style="padding-bottom: 30%;background: #1F2D3D">
-
-  </div>
+  <div style="padding-bottom: 30%;background: #1F2D3D"></div>
 </div>
 ```
 
